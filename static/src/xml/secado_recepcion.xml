@@ -1,0 +1,5 @@
+<templates id="template" xml:space="preserve">
+    <t t-name="FieldMany2OneCustom" t-extend="FieldMany2One">
+        <t t-jquery="input" t-operation="attributes" options="{&quot;custom-package-id&quot;: true}"/>
+    </t>
+</templates>

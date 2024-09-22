@@ -1,0 +1,65 @@
+<odoo>
+  <data>
+    <record id="view_secado_paquetes_form" model="ir.ui.view">
+      <field name="name">view.secado_externo.secado_paquetes.form</field>
+      <field name="model">secado_externo.secado_paquetes</field>
+      <field name="arch" type="xml">
+        <form string="Paquetes">
+          <sheet>
+            <group name="group_top">
+              <field name="package_id"/>
+              <field name="product_name"/>
+              <field name="product_id"/>
+              <field name="quantity"/>
+              <field name="pul"/>
+              <field name="recepcionado"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+
+    <record id="view_secado_paquetes_tree" model="ir.ui.view">
+      <field name="name">view.secado_externo.secado_paquetes.tree</field>
+      <field name="model">secado_externo.secado_paquetes</field>
+      <field name="arch" type="xml">
+        <tree string="Paquetes" editable="top">
+          <!-- <field name="secado_formulario_id"/> -->
+          <field name="package_id" attrs="{'readonly':[('id','>', 0)]}"/>
+          <field name="product_name" attrs="{'readonly':[('id','>', 0)]}"/>
+          <field name="product_id" attrs="{'readonly':[('id','>', 0)]}"/>
+          <field name="quantity" attrs="{'readonly':[('id','>', 0)]}"/>
+          <field name="pul" attrs="{'readonly':[('id','>', 0)]}"/>
+          <field name="recepcionado" attrs="{'readonly':[('id','>', 0)]}"/>
+
+        </tree>
+      </field>
+    </record>
+<!-- 
+    <record id="view_secado_paquetess_search" model="ir.ui.view">
+      <field name="name">view.secado_externo.secado_paquetes.search</field>
+      <field name="model">secado_externo.secado_paquetes</field>
+      <field name="arch" type="xml">
+        <search>
+        </search>
+      </field>
+    </record> -->
+
+    <record id="action_secado_paquetes_view" model="ir.actions.act_window">
+      <field name="name">Registro Paquetes</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">secado_externo.secado_paquetes</field>
+      <field name="view_mode">tree,form</field>
+      <!-- <field name="context">{"search_default_process_status":1}</field> -->
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+          Paquetes Secados Externos
+        </p>
+        <p>
+          Click 'Nuevo' para añadir nuevos elementos
+        </p>
+      </field>
+    </record>
+  </data>
+</odoo>

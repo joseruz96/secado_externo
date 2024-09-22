@@ -1,0 +1,138 @@
+<odoo>
+  <data>
+    <record id="view_secado_formulario_form" model="ir.ui.view">
+      <field name="name">view.secado_externo.secado_formulario.form</field>
+      <field name="model">secado_externo.secado_formulario</field>
+      <field name="arch" type="xml">
+        <form string="Generar Secado Externo">
+          <header>
+            <button 
+              name="action_confirm" 
+              type="object" 
+              class="oe_highlight" 
+              data-hotkey="v" 
+              string="Confirmar" 
+              attrs="{'invisible': [('state', '=', 'done')]}" 
+              confirm="¿Estás seguro de que deseas confirmar este despacho?" 
+            />
+            <field name="state" widget="statusbar" statusbar_visible="draft,cancel,done" />
+            <!-- <field name="picking_id" widget="many2one_button" options="{'no_create': True}" /> -->
+            <!-- <field name="picking_count" invisible="1"/>
+            <button name="action_view_pickings" widget='statinfo' type="object" icon="fa-truck" string="Despachos"  /> -->
+
+          </header>
+          <sheet>
+            
+            <div class="oe_button_box" name="button_box" position="inside">
+              <button class="oe_stat_button" type="object" name="action_view_pickings"
+                  icon="fa-truck" attrs="{'invisible': [('picking_count', '=', 0)]}">
+                  <field string="Despachos" name="picking_count" widget="statinfo"/>
+              </button>
+            </div>
+            <div class="oe_title">
+              <h1>
+                  <field name="name" attrs="{'invisible': [('name','=','/')]}"/>
+              </h1>
+            </div>
+            <group name="group_top">
+              <group name="destino" string="Destino" col='2'>          
+                <field name="partner_id" required="1"/>
+                <field name="company_id" invisible="1"/>
+                <field name="partner_child_id" required="1"/>
+                <field name="doc_origin"/>
+                <field name="date"/>
+              </group>
+              <group name="transporte" string="Transporte" col='2'>
+                <field name="chofer" required="1"/>
+                <field name="chofer_rut" required="1"/>  
+                <field name="patente_camion" required="1"/>
+                <field name="patente_carro" required="1"/>
+              </group> 
+              <group name="detalle" string="Detalle" col='2'>
+                <field name="flete" required="1"/>
+                <field name="price_per_pul" required="1"/>
+                <field name="quantity" readonly="1"/>
+                <field name="package_count" readonly="1"/>
+                <field name="total_pul" readonly="1"/>
+                <field name="subtotal_price" readonly="1"/>
+                <field name="impuesto" readonly="1"/>
+                <field name="total_price" readonly="1"/>
+              </group>
+              <group string="Archivar Documentos">
+                <field name="documentos" widget="many2many_binary"/>
+              </group>
+              <field name="picking_type_id" invisible="1"/>
+            </group>
+            <notebook>
+              <page string="Paquetes">
+                <field name="secado_paquetes_ids" attrs="{'readonly':[('state','=', 'done')]}"/>
+              </page>
+            </notebook>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+
+    <record id="view_secado_formulario_tree" model="ir.ui.view">
+      <field name="name">view.secado_externo.secado_formulario.tree</field>
+      <field name="model">secado_externo.secado_formulario</field>
+      <field name="arch" type="xml">
+        <tree 
+          string="Registro Secados Externos"
+          decoration-success="state =='done'"
+          decoration-warning="state == 'draft'"
+          decoration-muted="state == 'cancel'"
+        >
+          <field name="partner_id"/>
+          <field name="partner_child_id"/>
+          <field name="date"/>
+          <field name="quantity"/>
+          <field name="price_per_pul"/>
+          <field name="total_pul"/>
+          <field name="flete"/>
+          <field name="total_price"/>
+          <field name="state" string="Estado"/>
+        </tree>
+      </field>
+    </record>
+<!-- 
+    <record id="view_secado_formularios_search" model="ir.ui.view">
+      <field name="name">view.secado_externo.secado_formulario.search</field>
+      <field name="model">secado_externo.secado_formulario</field>
+      <field name="arch" type="xml">
+        <search>
+        </search>
+      </field>
+    </record> -->
+
+    <record id="view_secado_formulario_search" model="ir.ui.view">
+      <field name="name">view.secado_externo.secado_formulario.search</field>
+      <field name="model">secado_externo.secado_formulario</field>
+      <field name="arch" type="xml">
+        <search>
+          <filter name="filter_done" string="Hecho" domain="[('state', '=', 'done')]"/>
+          <filter name="filter_draft" string="Borrador" domain="[('state', '=', 'draft')]"/>
+          <filter name="filter_cancel" string="Cancelado" domain="[('state', '=', 'cancel')]"/>
+        </search>
+      </field>
+    </record>
+
+
+    <record id="action_secado_formulario_view" model="ir.actions.act_window">
+      <field name="name">Registro Secados Externos</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">secado_externo.secado_formulario</field>
+      <field name="view_mode">tree,form</field>
+      <!-- <field name="context">{"search_default_process_status":1}</field> -->
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+          Secados Externos
+        </p>
+        <p>
+          Click 'Nuevo' para añadir nuevos elementos
+        </p>
+      </field>
+    </record>
+  </data>
+</odoo>

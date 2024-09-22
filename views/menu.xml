@@ -1,0 +1,15 @@
+<odoo>
+  <data>
+  <!-- PRINCIPAL -->
+  <menuitem id="menu_secador_externo_root" name="Secado Externo" sequence="10"/>
+  <!-- <menuitem id="secador_externo_dashboard" name="Tablero Control" parent="menu_secador_externo_root" sequence="1" action="action_dashboard"/> -->
+    <!-- SECADOR FORMULARIO -->
+  <menuitem id="menu_secador_formulario" name="Registro Secador Externo" parent="menu_secador_externo_root" sequence="100"/>
+      <!-- SUB SECADOR FORMULARIO -->
+  <menuitem id="sub_secador_formulario" name="Registro Secador Externo" parent="menu_secador_formulario" sequence="1000"/>
+      <!-- ACCIONES SECADOR FORMULARIO -->
+  <menuitem id="action_secador_formulario" name="Generar Secado Externo" parent="sub_secador_formulario" sequence="10000" action="action_secado_formulario_view"/>
+  <menuitem id="action_secador_paquetes" name="Paquetes" parent="sub_secador_formulario" sequence="10001" action="action_secado_paquetes_view"/>
+  <menuitem id="action_secador_recepcion" name="Recepciones" parent="sub_secador_formulario" sequence="10002" action="action_secado_recepcion_view"/>
+  </data>
+</odoo>
